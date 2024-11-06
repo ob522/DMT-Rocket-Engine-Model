@@ -1,7 +1,7 @@
 # Main script to run the analysis
 from data_loader import assign_constants
 from fluid_functions import chamber_nozzle_sizing, conical_radius_function, conical_area_function, mach_no_as_function_of_distance, pressure_as_function_of_distance,temperature_as_function_of_distance,density_as_function_of_distance,velocity_as_function_of_distance
-from heat_transfer_functions import hg_as_function_of_distance, constant_hl_value, SS_HT_analysis_along_chamber, SS_HT_itterative_analysis_along_chamber
+from heat_transfer_functions import hg_as_function_of_distance, constant_hl_value, SS_HT_analysis_along_chamber, SS_HT_itterative_analysis_along_chamber,calculate_hg
 from plotting import plot_chamber_nozzle_geometry,plot_multiple_sets
 import constants as c  # Import constants from the constants file
 
@@ -13,22 +13,19 @@ def main():
 
     (A0, At, Ae, Lc) = chamber_nozzle_sizing(Pe, P0, F, CR, char_L, T0, gamma, R)
 
-    (x_values1, r_values) = conical_radius_function(A0, At, Ae, Lc, alpha)[:2]
-    #(x_values, r_values) = conical_area_function(A0, At, Ae, Lc, alpha)
+    (x_values, r_values, throat_index) = conical_radius_function(A0, At, Ae, Lc, alpha)
+    A_values = conical_area_function(A0, At, Ae, Lc, alpha)[1]
 
-    (x_values2, M_values) = mach_no_as_function_of_distance(A0, At, Ae, Lc, alpha, gamma)
-    (P_values) = pressure_as_function_of_distance(A0, At, Ae, Lc, alpha, gamma,P0)[1]
-    (rho_values) = density_as_function_of_distance(A0, At, Ae, Lc, alpha, gamma,rho0)[1]
-    (T_values) = temperature_as_function_of_distance(A0, At, Ae, Lc, alpha, gamma,T0)[1]
-    (V_values) = velocity_as_function_of_distance(A0, At, Ae, Lc, alpha, gamma,R,T0)[1]
+    M_values = mach_no_as_function_of_distance(A0, At, Ae, Lc, alpha, gamma)[1]
+    P_values = pressure_as_function_of_distance(A0, At, Ae, Lc, alpha, gamma,P0)[1]
+    rho_values = density_as_function_of_distance(A0, At, Ae, Lc, alpha, gamma,rho0)[1]
+    T_values = temperature_as_function_of_distance(A0, At, Ae, Lc, alpha, gamma,T0)[1]
+    V_values = velocity_as_function_of_distance(A0, At, Ae, Lc, alpha, gamma,R,T0)[1]
 
-    A_values,throat_index = conical_area_function(A0, At, Ae, Lc, alpha)[1:]
-
-
-    Tw = 2500 ################# this is the firts estimate of wall temp. ######## will be itterated !!!!!!!!!
-    (hg_values) = hg_as_function_of_distance(P0,A0, At, Ae, Lc, alpha, gamma,R,Cp,T0,Tw)[1]
-    print(hg_values[throat_index])
-    print("........................")
+    #Tw = 2500 ################# this is the firts estimate of wall temp. ######## will be itterated !!!!!!!!!
+    #(hg_values) = hg_as_function_of_distance(P0,A0, At, Ae, Lc, alpha, gamma,R,Cp,T0,Tw)[1]
+    #print(hg_values[throat_index])
+    #print("........................")
 
     """
     Tw = 2500 ################# this is the firts estimate of wall temp. ######## will be itterated !!!!!!!!!
@@ -51,20 +48,22 @@ def main():
 
 
 
-    print (x_values1)
-    print (r_values)
+    #print (x_values1)
+    #print (r_values)
 
     #Plots:
 
     #plot_chamber_nozzle_geometry(x_values1, r_values)
 
     plots = (
-        #(x_values2, M_values, 'X Values', 'Mach Number'),
-        #(x_values2, P_values, 'X Values', 'Pressure (P)'),
-        #(x_values2, rho_values, 'X Values', 'Density (ρ)'),
-        (x_values2, T_values, 'X Values', 'Temperature (T)'),
-        #(x_values2, V_values, 'X Values', 'Velocity (V)'),
-        (x_values2, hg_values, 'X Values', 'hg'),
+        
+        (x_values, A_values, 'X Values', 'Area'),
+        (x_values, M_values, 'X Values', 'Mach Number'),
+        (x_values, P_values, 'X Values', 'Pressure (P)'),
+        (x_values, rho_values, 'X Values', 'Density (ρ)'),
+        (x_values, T_values, 'X Values', 'Temperature (T)'),
+        (x_values, V_values, 'X Values', 'Velocity (V)'),
+        #(x_values2, hg_values, 'X Values', 'hg'),
         #(x_values2, q_values, 'X Values', 'q'),
         #(x_values2, Tl_values, 'X Values', 'Tl'),
         #(x_values2, Twg_values, 'X Values', 'Twg'),
@@ -73,6 +72,19 @@ def main():
     )
 
     plot_multiple_sets(plots)
+
+    print("Mt:", M_values[throat_index])
+    print("Pt:", P_values[throat_index])
+    print("rhot:", rho_values[throat_index])
+    print("Tt:", T_values[throat_index])
+    print("Vt:", V_values[throat_index])
+
+    Tw = 2500
+    At = A_values[throat_index]
+    Mt = M_values[throat_index]
+
+    hgt = calculate_hg(P0, At, gamma,R,Cp,T0,Tw, At, Mt)
+    print("hgt:", hgt)
 
 
 if __name__ == "__main__":
