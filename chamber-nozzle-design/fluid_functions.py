@@ -52,8 +52,6 @@ def chamber_nozzle_sizing(Pe,P0,F,CR,char_L, T0,gamma,R):
     At = throat_area(m_dot, P0, T0, gamma,R )
     Ae = exit_area(Me, At, gamma)
     (A0, Lc) = chamber_sizing(char_L, At, CR)
-    print(m_dot)  ############################### Remove
-    print("looooooooooooooooooooooook")########## Remove
     return (A0,At,Ae,Lc)
 
 def conical_radius_function(A0, At, Ae, Lc, alpha):
