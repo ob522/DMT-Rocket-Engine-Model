@@ -73,6 +73,7 @@ def main():
 
     plot_multiple_sets(plots)
 
+    print("At:", A_values[throat_index])
     print("Mt:", M_values[throat_index])
     print("Pt:", P_values[throat_index])
     print("rhot:", rho_values[throat_index])

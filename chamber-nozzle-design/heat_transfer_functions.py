@@ -14,7 +14,7 @@ def Prandlt_estimate(gamma):
 def hg_as_function_of_distance(P0,A0, At, Ae, Lc, alpha, gamma,R,Cp,T0,Tw):
     Pr = Prandlt_estimate(gamma)
     mu = 7.02257 *10**(-5)  ## Temporary## ## need to replace with function for calculation ############
-    c_star = np.sqrt(R*T0)/(np.sqrt(2*gamma/(gamma-1))*(2/(gamma+1))**((gamma+1)/(2*(gamma+1)))) ## may require update ##### based on research ############
+    c_star = np.sqrt(R*T0)/(np.sqrt(2*gamma/(gamma-1))*(2/(gamma+1))**((gamma+1)/(2*(gamma-1)))) ## may require update ##### based on research ############
     rc = 0.003 #throat radius of curvature
 
     Dt = np.sqrt((4*At/np.pi))
@@ -28,8 +28,11 @@ def hg_as_function_of_distance(P0,A0, At, Ae, Lc, alpha, gamma,R,Cp,T0,Tw):
 
 def calculate_hg(P0, At, gamma,R,Cp,T0,Tw, Area, M):
     Pr = Prandlt_estimate(gamma)
-    mu = 7.02257 *10**(-5)  ## Temporary## ## need to replace with function for calculation ############
-    c_star = np.sqrt(R*T0)/(np.sqrt(2*gamma/(gamma-1))*(2/(gamma+1))**((gamma+1)/(2*(gamma+1)))) ## may require update ##### based on research ############
+    #Pr = 0.61
+    #mu = 7.02257 *10**(-5)  ## Temporary## ## need to replace with function for calculation ############
+    mu = 6.5*10**(-5)
+    #c_star = np.sqrt(R*T0)/(np.sqrt(2*gamma/(gamma-1))*(2/(gamma+1))**((gamma+1)/(2*(gamma-1)))) ## may require update ##### based on research ############
+    c_star = np.sqrt(gamma*R*T0)/(gamma*np.sqrt((2/(gamma+1))**((gamma+1)/(gamma-1))))
     rc = 0.003 #throat radius of curvature
 
     Dt = np.sqrt((4*At/np.pi))
