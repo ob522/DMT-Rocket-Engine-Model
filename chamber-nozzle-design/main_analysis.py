@@ -54,7 +54,7 @@ def main():
     #Plots:
 
     #plot_chamber_nozzle_geometry(x_values1, r_values)
-
+    """
     plots = (
         
         (x_values, A_values, 'X Values', 'Area'),
@@ -63,6 +63,7 @@ def main():
         (x_values, rho_values, 'X Values', 'Density (ρ)'),
         (x_values, T_values, 'X Values', 'Temperature (T)'),
         (x_values, V_values, 'X Values', 'Velocity (V)'),
+
         #(x_values2, hg_values, 'X Values', 'hg'),
         #(x_values2, q_values, 'X Values', 'q'),
         #(x_values2, Tl_values, 'X Values', 'Tl'),
@@ -70,23 +71,24 @@ def main():
         #(x_values2, Twl_values, 'X Values', 'Twl')
 
     )
+    """
 
-    plot_multiple_sets(plots)
-
+    #plot_multiple_sets(plots)
+    
     print("At:", A_values[throat_index])
     print("Mt:", M_values[throat_index])
     print("Pt:", P_values[throat_index])
     print("rhot:", rho_values[throat_index])
     print("Tt:", T_values[throat_index])
     print("Vt:", V_values[throat_index])
-
+    
     Tw = 2500
     At = A_values[throat_index]
     Mt = M_values[throat_index]
 
     hgt = calculate_hg(P0, At, gamma,R,Cp,T0,Tw, At, Mt)
     print("hgt:", hgt)
-
+    
 
 if __name__ == "__main__":
     main()

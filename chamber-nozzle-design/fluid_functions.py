@@ -112,7 +112,8 @@ def mach_no_as_function_of_distance(A0, At, Ae, Lc, alpha, gamma):
 
     def myNewton(x0,eps, A,At,gamma):
         # set a dx step
-        dx = 0.1
+        #dx = 0.1
+        dx = 1e-4
         # set initial guess as solution
         xn = x0
         # set the error large enough, to enter the loop once

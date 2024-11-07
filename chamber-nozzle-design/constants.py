@@ -4,12 +4,20 @@ CONSTRAINED_VARIABLES = {
     'exit pressure': 1,    #bar
     'chamber pressure': 30, #bar
     'target thrust': 1,     #kN
-    'O/F ratio': 5,         
+    'O/F ratio': 3,         
     'contraction ratio': 4,
     'characteristic length': 1,
     # Add other physical parameters as needed
 }
 
+NASA_CEA_OUTPUTS = {
+    'combustion temperature': 2724.07,    #K
+    'combustion density': 2.9887,    #kg*m-3
+    'Cp': 2.1680, #KJ/(KG)(K)
+    'gamma': 1.2209,
+    # Add other physical parameters as needed
+}
+"""
 NASA_CEA_OUTPUTS = {
     'combustion temperature': 3205.27,    #K
     'combustion density': 2.9018,    #kg*m-3
@@ -17,7 +25,7 @@ NASA_CEA_OUTPUTS = {
     'gamma': 1.14,
     # Add other physical parameters as needed
 }
-
+"""
 CONICAL_NOZZLE_PARAMETERS = {
     'alpha': 0.26179939,    #rads
 
