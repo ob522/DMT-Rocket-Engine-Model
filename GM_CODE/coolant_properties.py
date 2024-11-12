@@ -14,6 +14,8 @@ C_p = ethanol.specific_heat
 m_tot = 0.135 #kg/s as estimated by rpa
 N= 50 # number of channels (assumed)
 m_channel = m_tot/N
+
+d_t = 17 #diameter of throat in mm
 h = 0.001 #assumed
 w = 0.0005 #width at throat must be very small as it has small region
 A = h*w

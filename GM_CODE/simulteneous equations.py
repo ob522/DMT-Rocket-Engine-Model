@@ -2,8 +2,8 @@ import numpy as np
 from coolant_properties import h_coolant
 
 h_g = 7737 #value from RPA simulation
-t_w = 0.001 #thickness
-k = 100 #thermal conductivity of steel alloy
+t_w = 0.002 #thickness
+k = 20 #thermal conductivity of steel alloy
 h_l = h_coolant
 T_g = 2057 #temp of gas as found from RPA
 T_l = 335 #in kelvin, assumed for the throat
