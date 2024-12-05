@@ -7,7 +7,7 @@ ethanol = Fluid(FluidsList.Ethanol).with_state(
 )
 
 ethanol2 = Fluid(FluidsList.Ethanol).with_state(
-    Input.pressure(4.5e6), Input.temperature(600) #at 4.5 MPa and 335 K (will enter nozzle at 300 K, assume there will be 35 K increase on temp up to throat)
+    Input.pressure(4.5e6), Input.temperature(600) 
 )
 
 rho = ethanol.density 
@@ -15,6 +15,12 @@ conductivity = ethanol.conductivity
 mu = ethanol.dynamic_viscosity
 C_p = ethanol.specific_heat
 mu_w = ethanol2.dynamic_viscosity
+
+print('conductivity', conductivity)
+print('C_p',C_p)
+print('rho',rho)
+print('mu',mu)
+print('mu_w',mu_w)
 
 m_tot = 0.135 #kg/s as estimated by rpa
 N= 60 # number of channels (assumed)

@@ -82,7 +82,7 @@ def main():
     print("Tt:", T_values[throat_index])
     print("Vt:", V_values[throat_index])
     
-    Tw = 2500
+    Tw = 1100
     At = A_values[throat_index]
     Mt = M_values[throat_index]
 

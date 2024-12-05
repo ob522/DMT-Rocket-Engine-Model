@@ -25,8 +25,6 @@ w_c = np.arange(len(w))
 w_e = np.arange(len(w))
 
 
-
-
 for i in range(0,len(w)-1):
     N[i] = math.floor(circ/(w[i]+min_rib)) #rounds down to the nearest number of channels
     m_channel[i]= m_tot/N[i]
@@ -60,6 +58,9 @@ for i in range(0,len(h)):
 #print(Re) # a lot of the values are under 4000 which is weird
 print(h_coolant)
 print(N,w_c,w_e)
+
+print(Re)
+print(v)
 
 h_coolant_value_0_5 = h_coolant[1, 3]  # h=1 mm and w=0.6 mm
 

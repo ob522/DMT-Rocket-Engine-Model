@@ -1,5 +1,5 @@
 import numpy as np
-from multi_dimension_channels import h_coolant,h,w, h_sieder
+from multi_dimension_channels import h_coolant,h,w
 
 # Given constants
 h_g = 11000  # heat transfer coefficient from gas side (W/m^2*K)
@@ -12,14 +12,14 @@ T_l = 335  # temperature of coolant (K)
 
 
 # Initialize an empty list to store T_wg values
-T_wg_matrix = np.zeros(np.shape(h_sieder))
+T_wg_matrix = np.zeros(np.shape(h_coolant))
 
 # Iterate through each coolant heat transfer coefficient in the h_l matrix
 for i in range(0,len(h)):
     for j in range(0,len(w)):
     # Define the coefficient matrix A and constant vector B for each h_l value
         A = np.array([
-            [1/h_sieder[i,j], 0, -1],      # First equation coefficients
+            [1/h_coolant[i,j], 0, -1],      # First equation coefficients
             [1/h_g, 1, 0],       # Second equation coefficients
             [t_w/k, -1, 1],      # Third equation coefficients
         ])
@@ -38,7 +38,7 @@ for i in range(0,len(h)):
 # Convert the list of T_wg values to a numpy array for easy manipulation
 T_wg_matrix = np.array(T_wg_matrix)
 
-print("Matrix of T_wg values for each h_l:")
+print("Matrix of T_wg values for each h_l:", T_wg_matrix )
 
-
+print("Matrix of T_wg values for 1x2mm:", T_wg_matrix[3,1] )
 
