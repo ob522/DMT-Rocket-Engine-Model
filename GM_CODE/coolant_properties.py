@@ -1,0 +1,42 @@
+import CoolProp as CP
+
+from pyfluids import Fluid, Mixture, FluidsList, Input
+
+ethanol = Fluid(FluidsList.Ethanol).with_state(
+    Input.pressure(4.5e6), Input.temperature(75) #at 4.5 MPa and 335 K (will enter nozzle at 300 K, assume there will be 35 K increase on temp up to throat)
+)
+
+ethanol2 = Fluid(FluidsList.Ethanol).with_state(
+    Input.pressure(4.5e6), Input.temperature(600) 
+)
+
+rho = ethanol.density 
+conductivity = ethanol.conductivity
+mu = ethanol.dynamic_viscosity
+C_p = ethanol.specific_heat
+mu_w = ethanol2.dynamic_viscosity
+
+print('conductivity', conductivity)
+print('C_p',C_p)
+print('rho',rho)
+print('mu',mu)
+print('mu_w',mu_w)
+
+m_tot = 0.135 #kg/s as estimated by rpa
+N= 60 # number of channels (assumed)
+m_channel = m_tot/N
+
+d_t = 17.33 #diameter of throat in mm
+h = 0.001 #assumed
+w = 0.0005 #width at throat must be very small as it has small region
+A = h*w
+v = m_channel/(rho*A)
+
+d = 1.30*(h*w)**0.625/(h+w)**0.25 #https://www.engineeringtoolbox.com/equivalent-diameter-d_205.html
+print(d)
+Re = rho*v*d/mu #as long as Re>4000 we can use the equation below
+print(Re)
+Pr = mu*C_p/conductivity
+h_coolant = 0.023*conductivity/d*Re**0.8*Pr**0.4
+print(h_coolant)
+
