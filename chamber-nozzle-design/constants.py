@@ -4,19 +4,28 @@ CONSTRAINED_VARIABLES = {
     'exit pressure': 1,    #bar
     'chamber pressure': 30, #bar
     'target thrust': 1,     #kN
-    'O/F ratio': 3,         
-    'contraction ratio': 4,
+    'O/F ratio': 2.3,         
+    'contraction ratio': 16,  # this needs research!!!!!!!!
     'characteristic length': 1,
     # Add other physical parameters as needed
 }
 
-NASA_CEA_OUTPUTS = {
-    'combustion temperature': 2724.07,    #K
-    'combustion density': 2.9887,    #kg*m-3
-    'Cp': 2.1680, #KJ/(KG)(K)
-    'gamma': 1.2209,
+NASA_CEA_OUTPUTS = { #1
+    'combustion temperature': 2037.3625,    #K
+    'combustion density': 3.6283,    #kg*m-3
+    'Cp': 2.0810, #KJ/(KG)(K)
+    'gamma': 1.2598,
     # Add other physical parameters as needed
 }
+"""
+NASA_CEA_OUTPUTS = { #OG
+    'combustion temperature': 2369.60,    #K
+    'combustion density': 3.1229,    #kg*m-3
+    'Cp': 2.0354, #KJ/(KG)(K)
+    'gamma': 1.2534,
+    # Add other physical parameters as needed
+}
+"""
 """
 NASA_CEA_OUTPUTS = {
     'combustion temperature': 3205.27,    #K
